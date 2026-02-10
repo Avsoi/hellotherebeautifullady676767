@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 650px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .photo {
+      width: 260px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 20px 0;
+      border: 8px solid white;
+      box-shadow: 0px 15px 30px rgba(0,0,0,0.35);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: #00ff88;
+      color: black;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.08);
+    }
+
+    #noBtn {
+      background: #ff3b3b;
+      color: white;
+      position: relative;
+    }
+
+    #finalMessage {
+      font-size: 2.5rem;
+      font-weight: bold;
+      display: none;
+      margin-top: 20px;
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+    }
+
+    #heart {
+      font-size: 5rem;
+      display: none;
+      margin-top: 20px;
+      animation: pop 1s infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="mainText">Will you be my Valentine? 💘</h1>
+    <p id="subText">Choose wisely... your future depends on this 😳</p>
+
+    <!-- PHOTO -->
+    <img src="meandgel.png" alt="Us" class="photo">
+
+    <div class="buttons" id="btnArea">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 💔</button>
+    </div>
+
+    <div id="finalMessage">YAYYYYY YOU'RE MY VALENTINE!!! 💞💞💞</div>
+    <div id="heart">❤️</div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const mainText = document.getElementById("mainText");
+    const subText = document.getElementById("subText");
+    const finalMessage = document.getElementById("finalMessage");
+    const heart = document.getElementById("heart");
+    const btnArea = document.getElementById("btnArea");
+
+    let yesCount = 0;
+
+    const yesMessages = [
+      "Wait... you're saying YES already? 😳",
+      "Are you sure?? 🤨",
+      "Like... 100% sure?? 😭",
+      "This decision is permanent... 🥶",
+      "No refunds. No returns. 😈",
+      "Think carefully... this changes EVERYTHING 💀",
+      "You can't take it back after this... 😳",
+      "Are you REALLY REALLY sure?? 😭😭",
+      "Last warning... are you sure??? 🚨",
+      "Okay but like... final final final answer?? 😵‍💫",
+      "If you click yes again, you are legally my Valentine 😤"
+    ];
+
+    yesBtn.addEventListener("click", () => {
+      yesCount++;
+
+      if (yesCount < yesMessages.length) {
+        mainText.textContent = yesMessages[yesCount];
+        subText.textContent = "Click YES again if you're brave enough 😳";
+
+        yesBtn.style.transform = `scale(${1 + yesCount * 0.15})`;
+      } else {
+        mainText.textContent = "TOO LATE. YOU'RE MINE NOW 😈💘";
+        subText.textContent = "";
+
+        btnArea.style.display = "none";
+        finalMessage.style.display = "block";
+        heart.style.display = "block";
+      }
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 100);
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    noBtn.addEventListener("click", () => {
+      mainText.textContent = "Nice try 😭 you can't say no.";
+      subText.textContent = "The NO button is decorative 💀";
+    });
+  </script>
+</body>
+</html>
